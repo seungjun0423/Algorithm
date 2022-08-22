@@ -11,7 +11,6 @@
 // N,K 가 주어질때 N의 모든 경우의 수를 담은 배열에서 K의 인덱스를 리턴해야한다.
 
 function orderOfPresentation (N, K) {
-  // TODO: 여기에 코드를 작성합니다.
   let num = 0;
   let result = 0;
   
