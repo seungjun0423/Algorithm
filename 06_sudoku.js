@@ -12,3 +12,27 @@ matrix[i][j]는 1 이상 9 이하의 자연수
 입력으로 주어지는 board 가지고 완성시킬 수 있는 보드는 유일(unique)합니다.
 숫자가 입력되지 않은 칸은 편의상 0이 입력되어 있습니다.
 */
+
+const sudoku = function (board) {
+  let list;
+  
+  for(let i=0;i<9;i++){
+    list = [1,2,3,4,5,6,7,8,9];
+
+    for(let j=0;j<9;j++){
+      if(board[i][j]!==0){
+        list = list.filter(el=>el!==board[i][j]);
+      } 
+    }
+
+    for(let j=0;j<9;j++){
+      if(board[i][j]===0){
+        for(let k=0;k<9;k++){
+          if(list.indexOf(board[k][j])>0){
+            list = list.filter(el=>el!==board[k][j]);
+          }
+        }
+      }
+    }
+  }
+};
