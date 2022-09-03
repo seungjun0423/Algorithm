@@ -40,7 +40,9 @@ function power(base, exponent) {
 return num 
 }
 
-/* 레퍼런스 코드 
+/* 
+레퍼런스 코드. 봐도 무슨말인지 모르겠다. 별다른 설명도 없어 이해하기 힘들다. 
+아마 수학적인 부분같다.
 
 function power(base, exponent) {
   if (exponent === 0) return 1;
