@@ -10,14 +10,22 @@ n개의 음이 아닌 정수들이 있습니다. 이 정수들을 순서를 바�
 
 */
 
-function DFS(numbers, target) {
-  let result = 0;
-
-  const recursion = (depth, accumulate) => {
-    if(depth < numbers.length) {
-      recursion(depth+1, accumulate + numbers[depth]);
-      re
-    }
-
+function solution(numbers, target) {
+  let answer = 0;
+  const length = numbers.length;
+  
+  const calc = (depth, ac) => {
+      if(depth < length) {
+          calc(depth + 1, ac + numbers[depth]);
+          calc(depth + 1, ac - numbers[depth]);   
+      } else {
+          if(ac === target) {
+              answer++;
+          }
+      }
   }
+  
+  calc(0, 0);
+  
+  return answer;
 }
