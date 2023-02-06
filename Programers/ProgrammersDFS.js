@@ -16,7 +16,7 @@ function solution(numbers, target) {
   
   const calc = (depth, ac) => {
       if(depth < length) {
-          calc(depth + 1, ac + numbers[depth]);
+        calc(depth + 1, ac + numbers[depth]);
           calc(depth + 1, ac - numbers[depth]);   
       } else {
           if(ac === target) {
