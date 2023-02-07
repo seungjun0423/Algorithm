@@ -13,8 +13,41 @@ maps는 0과 1로만 이루어져 있으며, 0은 벽이 있는 자리, 1은 벽
 */
 
 function solution(maps) {
-  // n은 map의 가로 길이 
-  const n = maps[0].length-1;
-  // m은 map의 세로 길이 
-  const m = maps.length-1;
+    
+  let arr = [];
+  let result = 0;
+  
+  // n은 map의 가로 길이 (인덱스 x)
+  const n = maps[0].length;
+  // m은 map의 세로 길이 (인덱스 x)
+  const m = maps.length;
+  
+  // 1단계 : 목적지 와 출발지가 막혀있는지 여부 체크 
+  if(!maps[m-2][n-1] && !maps[m-1][n-2]){
+      return -1;
+  }
+  if(!maps[1][0] && !maps[0][1]){
+      return -1;
+  }
+  
+  const move = (y,x) => {
+      if(x===n-1 && y===m-1){
+          arr.push(result);
+          return;
+      }
+      if(maps[y+1][x] && !maps[y][x+1]){
+          result++;
+          move(y+1,x);
+      }
+      if(!maps[y+1][x] && maps[y][x+1]){
+          result++;
+          move(y,x+1);
+      } else if(y < n-2 && x < m-2){
+          move(y+1,x);
+          move(y,x+1);
+      }
+      return;
+  }
+  move(0,0);
+  return arr.sort((a,b)=>a-b)[0];
 }
