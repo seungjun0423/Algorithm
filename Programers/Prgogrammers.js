@@ -16,6 +16,22 @@ begin과 target은 같지 않습니다.
 */
 
 function solution(begin, target, words) {
-  var answer = 0;
-  return answer;
+  let result = begin.length;
+  let indexArr = [];
+  let list = [];
+  
+  for(let i=0;i<begin.length;i++){
+      if(begin[i]===target[i]){
+          result--;
+      } else {
+          indexArr.push(i);
+      }
+  }
+  for(let i=0; i<indexArr.length;i++){
+      list.push(words.filter(el =>el[indexArr[i]]===target[indexArr[i]] ));
+      if(list.filter(el=>el.length===0).length!==0){
+          result=0;
+      }
+  }
+  list = [...new Set(list.flat())];
 }
