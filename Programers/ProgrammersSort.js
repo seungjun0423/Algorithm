@@ -11,7 +11,7 @@ numbers의 원소는 0 이상 1,000 이하입니다.
 */
 
 function solution(numbers) {
-    var answer = numbers.map(v=>v+'')
+    let answer = numbers.map(v=>v+'')
                         .sort((a,b) => (b+a)*1 - (a+b)*1)
                         .join('');
 
