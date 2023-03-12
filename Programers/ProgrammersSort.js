@@ -36,3 +36,32 @@ citations	return
 이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.
 */
 
+// 시간복잡도는 O(n^2)인 함수. 정답은 맞지만 효율이 떨어진다. 
+function solution(citations) {
+    let result = 0;
+    let arr = citations.sort((a,b)=>a-b);
+    for(let i=0; i<arr.length; i++){
+        if(arr[i] <= arr.filter((el)=> el>=arr[i]).length){
+            if(arr[i]>result){
+                result = arr[i];
+            }
+        }
+    }
+    return result;
+}
+
+//  시간복잡도 O(n)으로 리팩토링을 거친 함수
+function solution(citations) {
+    const n = citations.length;
+    const count = new Array(n + 1).fill(0); // 논문별 인용 횟수를 저장할 배열
+    for (let i = 0; i < n; i++) {
+        count[Math.min(citations[i], n)]++; // 논문별 인용 횟수를 측정하여 count 배열에 저장
+    }
+    let h = n; // 최대 H-Index는 논문 수 n입니다.
+    for (let i = 0; i <= n; i++) {
+        if (h <= i) break; // h번 이상 인용된 논문이 h편 이상이므로, h가 i보다 작아지면 더 이상 검사할 필요가 없습니다.
+        h -= count[i]; // i번 이상 인용된 논문의 수를 h에서 빼면서 H-Index를 구합니다.
+    }
+    return h;
+}
+
