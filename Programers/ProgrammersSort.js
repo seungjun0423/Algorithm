@@ -53,7 +53,7 @@ function solution(citations) {
 //  시간복잡도 O(n)으로 리팩토링을 거친 함수
 function solution(citations) {
     const n = citations.length;
-    const count = new Array(n + 1).fill(0); // 논문별 인용 횟수를 저장할 배열
+    const count = new Array(n + 1).fill(0); // 논문별 인용 횟수를 저장할 배열, 처음엔 모두 0을 기본 값을 지닌다. citations와 배열의 길이가 같다.
     for (let i = 0; i < n; i++) {
         count[Math.min(citations[i], n)]++; // 논문별 인용 횟수를 측정하여 count 배열에 저장
     }

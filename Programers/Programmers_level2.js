@@ -54,3 +54,52 @@ function expressions(num) {
   }
   return answer;
 }
+
+
+/*
+3진법 뒤집기
+
+문제 설명
+자연수 n이 매개변수로 주어집니다. n을 3진법 상에서 앞뒤로 뒤집은 후, 이를 다시 10진법으로 표현한 수를 return 하도록 solution 함수를 완성해주세요.
+
+제한사항
+n은 1 이상 100,000,000 이하인 자연수입니다.
+*/
+
+// 나의 풀이
+let str = '';
+
+function make3(n){ // 3진법 계산 함수
+    if(n<3){
+        str = str+String(n);
+        return;
+    }
+    else{
+        str = str + String(n%3)
+        make3(parseInt(n/3));
+    }
+}
+
+function make10(str){ // 10진법 계산 함수
+    let num = 0;
+    for(let i=(str.length-1); i>=0; i--){
+        let p = str.length-i-1;
+        if(p == 0) num += Number(str[i])
+        else{
+            let n = Math.pow(3, str.length-i-1)
+            num += Number(n* str[i])
+    
+        }
+    }
+    return num;
+}
+
+function solution(n) {
+    make3(n);
+    return make10(str);
+}
+
+// 다른 사람의 풀이
+function solution(n){
+  return parseInt(n.toString(3).split("").reverse().join(''), 3)
+}
