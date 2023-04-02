@@ -103,3 +103,56 @@ function solution(n) {
 function solution(n){
   return parseInt(n.toString(3).split("").reverse().join(''), 3)
 }
+
+
+// 3진법으로 치환해주는 함수(재귀함수 사용x)
+function toTernary(num) {
+  // 입력받은 정수가 0인 경우, 바로 문자열 '0'을 반환합니다.
+  if (num === 0) {
+    return '0';
+  }
+
+  // 3진법 수를 문자열로 저장할 변수를 초기화합니다.
+  let ternary = '';
+
+  // 입력받은 정수가 0이 아닌 동안 아래의 과정을 반복합니다.
+  while (num !== 0) {
+    // 현재 num을 3으로 나눈 나머지를 변수 remainder에 저장합니다.
+    const remainder = num % 3;
+    // remainder를 문자열로 변환하여 ternary 앞에 추가합니다.
+    ternary = remainder.toString() + ternary;
+
+    // num을 3으로 나누고, 소수점 이하를 버린 값으로 갱신합니다.
+    num = Math.floor(num / 3);
+  }
+
+  // 최종 변환된 3진법 문자열을 반환합니다.
+  return ternary;
+}
+
+
+/*
+JadenCase 문자열 만들기
+
+문제 설명
+JadenCase란 모든 단어의 첫 문자가 대문자이고, 그 외의 알파벳은 소문자인 문자열입니다. 단, 첫 문자가 알파벳이 아닐 때에는 이어지는 알파벳은 소문자로 쓰면 됩니다. (첫 번째 입출력 예 참고)
+문자열 s가 주어졌을 때, s를 JadenCase로 바꾼 문자열을 리턴하는 함수, solution을 완성해주세요.
+
+제한 조건
+s는 길이 1 이상 200 이하인 문자열입니다.
+s는 알파벳과 숫자, 공백문자(" ")로 이루어져 있습니다.
+숫자는 단어의 첫 문자로만 나옵니다.
+숫자로만 이루어진 단어는 없습니다.
+공백문자가 연속해서 나올 수 있습니다.
+*/
+
+function solution(s) {
+  let splitS = s.split(' ');
+  splitS = splitS.map((el) => {
+    if (typeof el[0] === "string") {
+      el = el[0].toUpperCase() + el.slice(1).toLowerCase();
+    }
+    return el;
+  });
+  return splitS.join(' ');
+}
