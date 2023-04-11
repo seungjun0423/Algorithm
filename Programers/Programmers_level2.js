@@ -448,4 +448,62 @@ function solution(n) {
 	}
 }
 
-solution(78)
+/*
+피보 나치 함수를 작성하는 다양한 방법 (재귀방식은 시간 복잡도도 크고 간단하기 때문에 생략한다)
+*/
+
+// 메모이제이션을 이용해 구하는 방법 (시간 복잡도 O(n))
+function solution(n) {
+	const memo = {};
+
+function fib(n) {
+	if (n <= 1) return n;
+
+	if (memo[n] === undefined) {
+		memo[n] = fib(n - 1) + fib(n - 2);
+	}
+
+	return memo[n];
+}
+
+return fib(n)%1234567;
+	
+} 
+
+
+// 반복문을 이용해 구하는 방법 (시간 복잡도는 O(n))
+function fibonacci(n) {
+  if (n <= 1) return n;
+
+  let prevPrev = 0;
+  let prev = 1;
+  let current;
+
+  for (let i = 2; i <= n; i++) {
+    current = prevPrev + prev;
+    prevPrev = prev;
+    prev = current;
+  }
+
+  return current;
+}
+
+
+// 최종 통과 알고리즘
+function solution(n) {
+  // n 번째 피보나치 수를 1234567로 나눈 나머지를 리턴하는 함수를 구하라
+  // 1. n번째 피보나치 수를 구하는 함수 : 재귀함수는 안된다.
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  let pre = 0;
+  let cur = 1;
+  let acc;
+
+  for (let i = 1; i < n; i++) {
+    acc = (pre + cur);
+    pre = cur % 1234567;
+    cur = acc % 1234567;
+  }
+
+  return acc % 1234567;
+}
