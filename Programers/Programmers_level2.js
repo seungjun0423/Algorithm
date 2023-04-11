@@ -447,3 +447,5 @@ function solution(n) {
 			nextNum += 1;
 	}
 }
+
+solution(78)
