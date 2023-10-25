@@ -16,8 +16,9 @@
  */
 
 const fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-let input = fs.readFileSync(filePath).toString().split("\n");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./10828.txt";
+let input = fs.readFileSync(filePath).toString().trim();
+input = input.split("\n")
 
 console.log(input);
 const stack = [];
