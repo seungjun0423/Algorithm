@@ -19,3 +19,29 @@ selection_sort(A[1..N]) { # A[1..N]을 오름차순 정렬한다.
 출력
 K 번째 교환되는 두 개의 수를 작은 수부터 한 줄에 출력한다. 교환 횟수가 K 보다 작으면 -1을 출력한다.
  */
+
+const fs = require("fs");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./선택정렬1.txt";
+let input = fs.readFileSync(filePath).toString().trim();
+input = input.split("\n")
+
+const len = input[0].split(' ')[0];
+const k = Number(input[0].split(' ')[1]);
+const arr = input[1].split(' ');
+let n = 0;
+
+for(let i=len-1; 0<i; i--){
+	const el = arr[i];
+	for(let j=i-1; 0<=j; j--){
+		const el2 = arr[j]
+		if( el < el2){
+			arr[i] = el2;
+			arr[j] = el;
+			n++;
+			if(n === k){
+				return `${arr[j]} ${arr[i]}`;
+			};
+		};
+	};
+};
+return -1;

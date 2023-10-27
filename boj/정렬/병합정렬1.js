@@ -41,3 +41,7 @@ merge(A[], p, q, r) {
 배열 A에 K 번째 저장 되는 수를 출력한다. 저장 횟수가 K 보다 작으면 -1을 출력한다.
 
  */
+const fs = require("fs");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./병합정렬1.txt";
+let input = fs.readFileSync(filePath).toString().trim();
+input = input.split("\n")
