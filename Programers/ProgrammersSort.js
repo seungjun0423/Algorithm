@@ -10,21 +10,60 @@ numbers의 원소는 0 이상 1,000 이하입니다.
 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
 */
 
+// 삽입정렬을 통한 문제 풀이, 그러나 시간 초과
 function solution(numbers) {
 	const copied = [...numbers];
 	for(let i=0; i<copied.length; i++){
 			const a = String(copied[i]);
-			for(let j=0; j<copied.length; j++){
-					if( i !== j){
-							const b = String(copied[j]);
-							if(Number(a+b) > Number(b+a)){
-									[copied[i], copied[j]] = [copied[j], copied[i]];
-							}
+			for(let j=0; j<i+1; j++){
+					const b = String(copied[j]);
+					if(Number(a+b) > Number(b+a)){
+							[copied[i], copied[j]] = [copied[j], copied[i]];
 					}
 			}
 	}
 	return copied.join('');
 }
+
+// 퀵정렬을 통한 문제풀이 시간 복잡도 통과
+function compare(a, b) {
+    const strA = String(a);
+    const strB = String(b);
+    return parseInt(strB + strA) - parseInt(strA + strB);
+}
+
+function quickSort(arr, compare) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+    
+    const pivot = arr[Math.floor(arr.length / 2)];
+    const left = [];
+    const right = [];
+    const equal = [];
+    
+    for (let num of arr) {
+        const result = compare(num, pivot);
+        if (result > 0) {
+            right.push(num);
+        } else if (result < 0) {
+            left.push(num);
+        } else {
+            equal.push(num);
+        }
+    }
+    
+    return quickSort(left, compare).concat(equal, quickSort(right, compare));
+}
+
+function solution(numbers) {
+    const sorted = quickSort(numbers, compare);
+    if (sorted[0] === 0) {
+        return '0';
+    }
+    return sorted.join('');
+}
+
 
 /*
 문제 설명
