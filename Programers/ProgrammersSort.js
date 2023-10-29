@@ -11,11 +11,19 @@ numbers의 원소는 0 이상 1,000 이하입니다.
 */
 
 function solution(numbers) {
-    let answer = numbers.map(v=>v+'')
-                        .sort((a,b) => (b+a)*1 - (a+b)*1)
-                        .join('');
-
-    return answer[0]==='0'?'0':answer;
+	const copied = [...numbers];
+	for(let i=0; i<copied.length; i++){
+			const a = String(copied[i]);
+			for(let j=0; j<copied.length; j++){
+					if( i !== j){
+							const b = String(copied[j]);
+							if(Number(a+b) > Number(b+a)){
+									[copied[i], copied[j]] = [copied[j], copied[i]];
+							}
+					}
+			}
+	}
+	return copied.join('');
 }
 
 /*
