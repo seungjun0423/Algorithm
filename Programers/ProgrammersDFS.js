@@ -10,24 +10,24 @@ n개의 음이 아닌 정수들이 있습니다. 이 정수들을 순서를 바�
 
 */
 
+// 나의 풀이 (완전탐색이지만 통과)
 function solution(numbers, target) {
-  let answer = 0;
-  const length = numbers.length;
-  
-  const calc = (depth, ac) => {
-      if(depth < length) {
-        calc(depth + 1, ac + numbers[depth]);
-          calc(depth + 1, ac - numbers[depth]);   
-      } else {
-          if(ac === target) {
-              answer++;
-          }
-      }
-  }
-  
-  calc(0, 0);
-  
-  return answer;
+	const arr = [...numbers.map(el=>el)];
+	const max = numbers.reduce((acc,cur)=>acc+cur);
+	const min = -max;
+	let stack = [''];
+	
+	if( target < min || target > max){
+			return 0;
+	}
+	while(arr.length !== 0){
+			const plus = `+${arr[0]}`;
+			const minus = `-${arr[0]}`;
+			stack = [...stack.map(el=>String(el)+plus),...stack.map(el=>String(el)+minus)]
+			arr.shift();
+	}
+	
+	return stack.filter(el=>eval(el)===target).length;
 }
 
 /*
