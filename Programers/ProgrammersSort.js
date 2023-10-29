@@ -26,16 +26,16 @@ function solution(numbers) {
 }
 
 // 퀵정렬을 통한 문제풀이 시간 복잡도 통과
-function compare(a, b) {
-    const strA = String(a);
-    const strB = String(b);
-    return parseInt(strB + strA) - parseInt(strA + strB);
-}
-
-function quickSort(arr, compare) {
+function quickSort(arr) {
+    function compare(a, b) {
+        const strA = String(a);
+        const strB = String(b);
+        return parseInt(strB + strA) - parseInt(strA + strB);
+    };
+    
     if (arr.length <= 1) {
         return arr;
-    }
+    };
     
     const pivot = arr[Math.floor(arr.length / 2)];
     const left = [];
@@ -52,16 +52,15 @@ function quickSort(arr, compare) {
             equal.push(num);
         }
     }
-    
     return quickSort(left, compare).concat(equal, quickSort(right, compare));
 }
 
 function solution(numbers) {
-    const sorted = quickSort(numbers, compare);
-    if (sorted[0] === 0) {
+    const result = quickSort(numbers);
+    if (result[0] === 0) {
         return '0';
     }
-    return sorted.join('');
+    return result.join('');
 }
 
 
