@@ -528,3 +528,20 @@ return stack.length ? 0 : 1;
 1 ≤ k ≤ tangerine의 길이 ≤ 100,000
 1 ≤ tangerine의 원소 ≤ 10,000,000
  */
+
+// 내 풀이, 정확도는 100점 이지만 시간 복잡도 개선필요
+function solution(k, tangerine) {
+	const list = [...new Set(tangerine)];
+	const arr = [];
+	for(let i=0; i<list.length; i++){
+			arr.push(tangerine.filter(el=>el===list[i]).length);
+	}
+	arr.sort((a,b)=>b-a);
+	let count = 0;
+	let result = 0;
+	while( count < k){
+			count += arr.shift();
+			result++;
+	}
+	return result;
+}
